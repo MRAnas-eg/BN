@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Block Network (BN) — Minecraft Ranks & Discord</title>
+  <meta name="description" content="Block Network — Buy Minecraft ranks & roles. Owner panel to customize shop." />
+  <link rel="icon" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" id="brand">
+      <img src="assets/bn-logo.svg" alt="BN Network" class="bnlogo" />
+      <div class="title">
+        <h1>BN Network</h1>
+        <p class="slogan">BN — Build. Buy. Battle.</p>
+      </div>
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#" data-section="home">Home</a>
+      <a href="#" data-section="shop">Shop</a>
+      <a href="#" data-section="credits">Credits</a>
+      <a href="#" data-section="dev">Dev Apply</a>
+      <a href="#" data-section="contact">Contact</a>
+      <a class="owner-link" href="#" id="openOwner">Owner Panel</a>
+      <button id="navToggle" aria-label="Toggle navigation">☰</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="home" class="page active">
+      <div class="hero">
+        <div class="hero-left">
+          <h2>Welcome to Block Network</h2>
+          <p>Professional Minecraft community. Buy ranks, get perks, and join our Discord.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#" data-section="shop">Buy Ranks</a>
+            <a class="btn" href="#" data-section="credits">Credits</a>
+            <a class="btn" href="#" id="playNow">Play Now</a>
+          </div>
+        </div>
+        <div class="hero-right pixel-art">
+          <div class="pixel-block"> </div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="panel">
+          <h4>Server</h4>
+          <div><strong>IP:</strong> <span id="serverIp">play.block-network.example</span></div>
+          <div><strong>Port:</strong> <span id="serverPort">19132</span></div>
+        </div>
+        <div class="panel">
+          <h4>Discord</h4>
+          <div id="discordName">discord.gg/your-invite</div>
+        </div>
+        <div class="panel">
+          <h4>Quick</h4>
+          <div><a href="#" data-section="dev">Apply as Dev</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="shop" class="page">
+      <h3>Shop — Ranks & Roles</h3>
+      <div class="shop-controls">
+        Payment mode: <strong id="currentPayment">--</strong>
+        <div class="right">
+          <button class="btn" id="ownerOpenBtn">Owner Panel</button>
+        </div>
+      </div>
+      <p class="muted">Choose a rank to view perks and purchase instructions.</p>
+      <div class="cards" id="shopCards"></div>
+    </section>
+
+    <section id="credits" class="page">
+      <h3>Credits</h3>
+      <p class="muted">How to earn and spend credits in Block Network.</p>
+      <div class="panel">
+        <h4>Receiver Username</h4>
+        <div id="receiverUser" class="muted">Not set</div>
+        <p class="muted">This is who receives credits when purchases are processed (owner-editable).</p>
+      </div>
+      <div class="panel">
+        <h4>Ways to earn credits</h4>
+        <ul>
+          <li>Daily login rewards</li>
+          <li>Event participation</li>
+          <li>Trading & giveaways</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="dev" class="page">
+      <h3>Developer / Staff Application</h3>
+      <p class="muted">Apply to become a developer, plugin author, or staff member.</p>
+      <form id="devForm" class="form">
+        <label>In-game name / Discord Tag<input name="name" required /></label>
+        <label>Role applying for<select name="role" required>
+          <option>Developer</option><option>Plugin Author</option><option>Moderator</option><option>Builder</option>
+        </select></label>
+        <label>Experience<textarea name="experience" rows="4" required></textarea></label>
+        <div class="form-row">
+          <button class="btn primary" type="submit">Submit Application</button>
+          <button class="btn" type="button" id="downloadJson">Download a copy</button>
+        </div>
+        <p id="devMsg" class="muted"></p>
+      </form>
+    </section>
+
+    <section id="contact" class="page">
+      <h3>Contact & Info</h3>
+      <p class="muted">Questions? DM on Discord or use the in-site info. This demo is static — real purchases and role assignments are handled through staff on Discord.</p>
+      <ul class="info-list">
+        <li><strong>Discord:</strong> <span id="discordContact">discord.gg/your-invite</span></li>
+        <li><strong>Email:</strong> contact@blocknetwork.example</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Owner Panel Modal -->
+  <div id="ownerModal" class="modal" aria-hidden="true" style="display:none;">
+    <div class="modal-content">
+      <button class="close" id="closeOwner">✕</button>
+
+      <div id="ownerLogin" class="owner-section">
+        <h3>Owner Login</h3>
+        <p class="muted">Enter the owner password to access the shop editor.</p>
+        <input id="ownerPass" type="password" placeholder="password" />
+        <div class="form-row" style="margin-top:10px;">
+          <button class="btn primary" id="ownerLoginBtn">Unlock</button>
+          <button class="btn" id="ownerCancel">Cancel</button>
+        </div>
+        <p id="ownerMsg" class="muted"></p>
+      </div>
+
+      <div id="ownerPanel" class="owner-section" style="display:none">
+        <h3>Owner — Shop Manager</h3>
+        <div class="panel-row">
+          <div>
+            <label>Shop payment mode</label>
+            <select id="paymentMode">
+              <option value="credits">Credits (in-game)</option>
+              <option value="real">Real Money</option>
+            </select>
+          </div>
+          <div>
+            <label>Receiver Username</label>
+            <input id="receiverInput" placeholder="in-game name or account" />
+          </div>
+          <div>
+            <label>Admin password (in code)</label>
+            <input id="showPass" readonly value="roundowner10@" />
+          </div>
+        </div>
+
+        <hr/>
+
+        <h4>Existing Items</h4>
+        <div id="adminList" class="admin-list"></div>
+
+        <h4 style="margin-top:12px">Add / Edit Item</h4>
+        <form id="adminForm" class="form">
+          <label>Name<input name="name" required /></label>
+          <label>Price<input name="price" required /></label>
+          <label>Perks (comma separated)<input name="perks" required /></label>
+          <div class="form-row">
+            <button class="btn primary" type="submit">Save Item</button>
+            <button class="btn" type="button" id="adminClear">Clear</button>
+          </div>
+        </form>
+
+        <div style="margin-top:12px;color:var(--muted)">Tip: After editing, open the Shop to verify changes. The shop uses the saved data in your browser.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
