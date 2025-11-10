@@ -52,10 +52,7 @@ function renderShop() {
         var card = document.createElement('div');
         card.className = 'card';
         var buyLabel = payment === 'real' ? 'Buy (Real Money)' : 'Buy with Credits';
-        card.innerHTML = "<h4>" + it.name + " <span style="float:right;font-weight:600">" + it.price + "</span></h4>
-      <p>" + it.perks.join(' · ') + "</p>
-      <div class="buy-row"><button class="btn" data-info="" + it.id + "">Info</button>
-      <button class="btn primary" data-buy="" + it.id + "">" + buyLabel + "</button></div>";
+                card.innerHTML = '<h4>' + it.name + ' <span style="float:right;font-weight:600">' + it.price + '</span></h4>\n      <p>' + it.perks.join(' · ') + '</p>\n      <div class="buy-row"><button class="btn" data-info="' + it.id + '">Info</button>\n      <button class="btn primary" data-buy="' + it.id + '">' + buyLabel + '</button></div>';
         container.appendChild(card);
     });
     setPayment(getPayment());
@@ -133,11 +130,7 @@ function populateAdmin() {
     items.forEach(function (it) {
         var row = document.createElement('div');
         row.className = 'admin-item';
-        row.innerHTML = "<div><strong>" + it.name + "</strong> — " + it.price + "<div class="muted" style="font-size:12px">" + it.perks.join(', ') + "</div></div>
-      <div style="display:flex;gap:6px;align-items:center">
-        <button class="btn" data-edit="" + it.id + "">Edit</button>
-        <button class="btn" data-delete="" + it.id + "">Delete</button>
-      </div>";
+                    row.innerHTML = '<div><strong>' + it.name + '</strong> — ' + it.price + '<div class="muted" style="font-size:12px">' + it.perks.join(', ') + '</div></div>\n      <div style="display:flex;gap:6px;align-items:center">\n        <button class="btn" data-edit="' + it.id + '">Edit</button>\n        <button class="btn" data-delete="' + it.id + '">Delete</button>\n      </div>';
         list.appendChild(row);
     });
     list.querySelectorAll('button').forEach(function (b) {
